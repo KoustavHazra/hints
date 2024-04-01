@@ -129,9 +129,9 @@ export class Service{
     };
 
     // get a preview of the file
-    async getFilePreview(fileId) {
+    getFilePreview(fileId) {
         try {
-            return await this.storage.getFilePreview(
+            return this.storage.getFilePreview(
                 conf.appwriteBucketId,
                 fileId
             )

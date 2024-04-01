@@ -5,7 +5,7 @@ import service from "../../appwrite/config";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-export default function PostForm({post}) {
+export default function PostForm({ post }) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
         defaultValues: {
             title: post?.title || "",
@@ -15,6 +15,8 @@ export default function PostForm({post}) {
         }
     });
 
+    console.log(`post is there? ${post}`);
+    
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
 
@@ -22,15 +24,22 @@ export default function PostForm({post}) {
     // if it doesn't have any data, create a new data.
     // to do that, submit function is created.
     const submit = async (data) => {
+        console.log(`data is there? ${data}`);
         if (post) {
+
+
             // if post is there, then we will upload it. So first we will upoload the new image file
             const file = data.image[0] ? await service.uploadFile(data.image[0]) : null;
+
+            console.log(`file is there? ${file}`);
 
             // now that new images is updated, we need to delete the old one
             // we can delete the old one, only if the file above is created.
             if (file) {
                 service.deleteFile(post.featuredImage);
             }
+
+            console.log(`file is actually there ${file}`);
 
             // now that new image is uploaded, and old image is deleted, we need to update the whole post
             const dbPost = await service.updatePost(post.$id, {
@@ -44,6 +53,8 @@ export default function PostForm({post}) {
                 // -----> should be handling this undefined thing in a better way. NEED TO UPDATE.          
             });
 
+            console.log(`dbPost is there? ${dbPost}`);
+
             // if post is also updated, we will navigate user to 
             if (dbPost) {
                 navigate(`/post/${dbPost.$id}`);
@@ -53,9 +64,11 @@ export default function PostForm({post}) {
             // if post is not there, first we will check any new images we need to upload or not
             const file = await service.uploadFile(data.image[0]);
             if (file) {
+                console.log(`new file is there? ${file}`);
+
                 const fileId = file.$id;  // got the new file id
                 data.featuredImage = fileId;  // in data the new fileId is uploaded
-                
+
                 // now that we have the new image, we have to create the new post
                 const dbPost = await service.createPost({
                     ...data, // spreaded the data because any time we are using any forms
@@ -63,6 +76,7 @@ export default function PostForm({post}) {
                     // will become available.
                     userId: userData.$id
                 });
+                console.log(`dbPost is there? ${dbPost}`);
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`);
                 }
@@ -137,7 +151,7 @@ export default function PostForm({post}) {
                 {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={appwriteService.getFilePreview(post.featuredImage)}
+                            src={service.getFilePreview(post.featuredImage)}
                             alt={post.title}
                             className="rounded-lg"
                         />
@@ -150,7 +164,7 @@ export default function PostForm({post}) {
                     {...register("status", { required: true })}
                 />
                 <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
-                    {post ? "Update" : "Submit"}
+                    {post ? "update" : "submit"}
                 </Button>
             </div>
         </form>

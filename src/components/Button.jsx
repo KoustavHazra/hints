@@ -8,16 +8,17 @@ export default function Button({
     className = "",
     ...props
 }) {
-//   const handleClick = (e) => {
-//     console.log("Button clicked");
-//     console.log("Button type:", type);
-// };
+  const handleClick = (e) => {
+    console.log("Button clicked");
+    console.log("Button type:", type);
+    console.log(`children ${className}`);
+};
 
 return (
     <button
         type={type}
         className={`px-4 py-2 rounded-lg ${bgColor} ${textColor} ${className}`}
-        // onClick={handleClick}
+        onClick={handleClick}
         {...props}
     >
         {children}
