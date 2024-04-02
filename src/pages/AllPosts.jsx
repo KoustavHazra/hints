@@ -4,12 +4,14 @@ import service from '../appwrite/config';
 function AllPosts() {
     const [posts, setPosts] = useState([]);
 
-    useEffect(() => {}, []);
-    service.getPosts([]).then((posts) => {
-        if (posts) {
-            setPosts(posts.documents)  // within posts the documents will be updated in the setPosts
-        }
-    })
+    useEffect(() => {
+        service.getPosts([]).then((posts) => {
+            if (posts) {
+                setPosts(posts.documents)  // within posts the documents will be updated in the setPosts
+            }
+        })
+    }, []);
+    
     
     return (
         <div className='w-full py-8'>

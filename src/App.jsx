@@ -36,7 +36,7 @@ function App() {
         dispatch(logout())
       }
     })
-    .catch(`Problem occured while fething user details in App.`)
+    // .catch(`Problem occured while fething user details in App.`)
     .finally(() => setLoading(false))
   }, []);
   // since no matter what, finally will always run.. we used to keep setLoading as false.

@@ -29,7 +29,7 @@ export default function Protected({children, authentication=true}) {
             // the condition here is, if the user sent authentication as false..
             // and authStatus from store is true.
             // so it will be like: !false && true !== false --> true && true --> redirected to login page.
-            navigate("/login");
+            navigate("/");
         }
         setLoader(false);
 

@@ -10,7 +10,7 @@ function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {register, handleSubmit} = useForm();
-    const [error, setError] = useState();
+    const [error, setError] = useState('');
     
     
     // here login we are using to handle the form submit.
@@ -35,7 +35,7 @@ function Login() {
                 // we just named it here as storeLogin, so that there is no confusion between the login from store
                 // and the login function we created here in this file.
                 
-                navigate('/')
+                navigate('/');
                 // and now that used is logged in, we are redirecting them to the root directory.
                 // we didn't used Link here, because in case of Link we have to click somewhere to navigate to.
                 // Whereas in navigate, we automatically get redirected to a route.
@@ -66,6 +66,7 @@ function Login() {
                         </Link>
             </p>
             {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+            
             <form onSubmit={handleSubmit(login)} className='mt-8'>
                 <div className='space-y-5'>
                     <Input

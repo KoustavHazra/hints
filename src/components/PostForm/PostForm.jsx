@@ -63,6 +63,7 @@ export default function PostForm({ post }) {
         } else {
             // if post is not there, first we will check any new images we need to upload or not
             const file = await service.uploadFile(data.image[0]);
+            console.log(`file is there? ${file}`);
             if (file) {
                 console.log(`new file is there? ${file}`);
 
@@ -97,7 +98,6 @@ export default function PostForm({ post }) {
                 .replace(/\s/g, "-");
         } 
         return "";
-    
     }, []);
 
     // now the slugTransform function we just created, we need to use it as well.
@@ -144,7 +144,7 @@ export default function PostForm({ post }) {
                 <Input
                     label="Featured Image :"
                     type="file"
-                    className="mb-4"
+                    className="mb-10"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
                     {...register("image", { required: !post })}
                 />
@@ -157,12 +157,12 @@ export default function PostForm({ post }) {
                         />
                     </div>
                 )}
-                <Select
+                {/* <Select
                     options={["active", "inactive"]}
                     label="Status"
-                    className="mb-4"
+                    className="mb-10"
                     {...register("status", { required: true })}
-                />
+                /> */}
                 <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
                     {post ? "update" : "submit"}
                 </Button>
@@ -170,4 +170,5 @@ export default function PostForm({ post }) {
         </form>
     );
 }
+
 
