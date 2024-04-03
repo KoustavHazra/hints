@@ -25,4 +25,4 @@ uploading post issue ----
 4. blogs are getting stored in appwrite, but while page switching blog is automatically getting deleted.
 
 Home page issue
-// even though there are posts available in all posts page, it is now showing in home page.
+1. even though there are posts available in all posts page, it is now showing in home page.
