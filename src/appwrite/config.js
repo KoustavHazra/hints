@@ -84,7 +84,7 @@ export class Service{
     // so only when the method is called, no arguments were passed. It automatically
     // by itself gets those posts where the status is active.
     // the queries in params, are passed by us and not by any user who calls this method.
-    async getPosts(queries = []) {
+    async getPosts() {
         try {
             return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,

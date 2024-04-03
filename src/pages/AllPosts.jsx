@@ -1,18 +1,29 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Container, Postcard } from '../components';
 import service from '../appwrite/config';
+import { setPosts } from '../store/postsSlice';
+import { setLoading } from '../store/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
 function AllPosts() {
-    const [posts, setPosts] = useState([]);
+    const loading = useSelector((state) => state.auth.loading);
+    const posts = useSelector((state) => state.posts.posts);
+    const dispatch = useDispatch();
 
     useEffect(() => {
+        dispatch(setLoading(true));
         service.getPosts([]).then((posts) => {
             if (posts) {
-                setPosts(posts.documents)  // within posts the documents will be updated in the setPosts
+                dispatch(setPosts(posts.documents));
+                dispatch(setLoading(false)); // Set loading to false when fetching completes
             }
-        })
-    }, []);
-    
-    
+        });
+    }, [dispatch]); // Include dispatch in the dependency array
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className='w-full py-8'>
             <Container>

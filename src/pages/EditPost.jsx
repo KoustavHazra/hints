@@ -4,11 +4,11 @@ import service from "../appwrite/config";
 import { useNavigate,  useParams } from 'react-router-dom';
 
 function EditPost() {
-    const [post, setPost] = useState(null);
+    const [post, setPost] = useState([]);
     
     // when user click on edit post, user will go the edit page. So we can fetch the 
     // available data from the url. And to fetch data from url, useParams() can help us.
-    const slug = useParams();
+    const {slug} = useParams();
     const navigate = useNavigate();
     useEffect(() => {
         if (slug) {

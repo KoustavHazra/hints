@@ -6,19 +6,21 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function PostForm({ post }) {
-    const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
-        defaultValues: {
-            title: post?.title || "",
-            slug: post?.$id || "",
-            content: post?.content || "",
-            status: post?.status || "active",
-        }
-    });
+    const { register, handleSubmit, watch, setValue, control, getValues } = useForm();
 
     console.log(`post is there? ${post}`);
     
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
+
+    useEffect(() => {
+        if (post) {
+            setValue("title", post.title || "");
+            setValue("slug", post.$id || "");
+            setValue("content", post.content || "");
+            setValue("status", post.status || "active");
+        }
+    }, [post, setValue]);
 
     // if post (param) has any data, then we should be able to edit it.
     // if it doesn't have any data, create a new data.
@@ -152,17 +154,18 @@ export default function PostForm({ post }) {
                     <div className="w-full mb-4">
                         <img
                             src={service.getFilePreview(post.featuredImage)}
+                            // src={service.getFilePreview(post.featuredImage)}  --> changed featuredImage to $id
                             alt={post.title}
                             className="rounded-lg"
                         />
                     </div>
                 )}
-                {/* <Select
+                <Select
                     options={["active", "inactive"]}
                     label="Status"
                     className="mb-10"
                     {...register("status", { required: true })}
-                /> */}
+                />
                 <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
                     {post ? "update" : "submit"}
                 </Button>
