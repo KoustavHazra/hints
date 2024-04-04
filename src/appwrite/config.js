@@ -86,13 +86,21 @@ export class Service{
     // the queries in params, are passed by us and not by any user who calls this method.
     async getPosts() {
         try {
-            return await this.databases.listDocuments(
+            const response = await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                [
-                    Query.equal("status", ["active"])
-                ]
-            )
+                []
+            );
+    
+            if (response.documents && response.documents.length > 0) {
+                // Filter the documents to include only those with status "active"
+                const activePosts = response.documents.filter(post => post.status === "active");
+                return activePosts;
+                
+            } else {
+                console.log("No active posts found.");
+                return [];
+            }
 
         } catch (error) {
             console.log(`Appwrite service :: getPosts error :: ${error}`);
@@ -130,15 +138,13 @@ export class Service{
 
     // get a preview of the file
     getFilePreview(fileId) {
-        try {
-            return this.storage.getFilePreview(
-                conf.appwriteBucketId,
-                fileId
-            )
-        } catch (error) {
-            console.log(`Appwrite service :: getFilePreview error :: ${error}`);
-            return false;
+        if (!fileId) {
+            throw new Error("Missing required parameter: fileId");
         }
+        return this.storage.getFilePreview(
+            conf.appwriteBucketId,
+            fileId
+        );
     };
 };
 

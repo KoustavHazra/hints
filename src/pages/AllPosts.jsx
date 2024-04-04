@@ -13,17 +13,30 @@ function AllPosts() {
     useEffect(() => {
         dispatch(setLoading(true));
         service.getPosts([]).then((posts) => {
+            console.log(`posts in all-posts page :: ${posts}`)
             if (posts) {
                 dispatch(setPosts(posts.documents));
                 dispatch(setLoading(false)); // Set loading to false when fetching completes
             }
         });
-    }, [dispatch]); // Include dispatch in the dependency array
+    }, [dispatch]);
 
-    if (loading) {
-        return <div>Loading...</div>;
+    useEffect(() => {
+        console.log(`loading after dispatching ${loading}`);
+    }, [loading]);
+
+    useEffect(() => {
+        console.log(`posts in state ::`, posts);
+    }, [posts]);
+
+    if (loading || !posts) {
+        return <div>Loading....</div>;
     }
 
+    if (posts.length === 0) {
+        return <div>No posts found</div>;
+    }
+    console.log(`posts in all-posts page :: ${posts}`)
     return (
         <div className='w-full py-8'>
             <Container>
@@ -36,7 +49,8 @@ function AllPosts() {
                 </div>
             </Container>
         </div>
-      )
+    );
+    
 }
 
 export default AllPosts;
