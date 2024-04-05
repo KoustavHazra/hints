@@ -13,10 +13,10 @@ function AllPosts() {
     useEffect(() => {
         dispatch(setLoading(true));
         service.getPosts([]).then((posts) => {
-            console.log(`posts in all-posts page :: ${posts}`)
             if (posts) {
-                dispatch(setPosts(posts.documents));
+                dispatch(setPosts({ posts: posts }));
                 dispatch(setLoading(false)); // Set loading to false when fetching completes
+                console.log(`posts in all-posts page :: ${posts}`)
             }
         });
     }, [dispatch]);
@@ -30,13 +30,14 @@ function AllPosts() {
     }, [posts]);
 
     if (loading || !posts) {
-        return <div>Loading....</div>;
+        return <div>Loading...</div>;
     }
 
     if (posts.length === 0) {
-        return <div>No posts found</div>;
+        return <div>Posts not found</div>;
     }
-    console.log(`posts in all-posts page :: ${posts}`)
+
+    console.log(`posts in all-posts page before return:: ${posts}`)
     return (
         <div className='w-full py-8'>
             <Container>

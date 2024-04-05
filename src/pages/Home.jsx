@@ -1,30 +1,30 @@
-import React, {useEffect, useState} from 'react'
-import service from "../appwrite/config";
-import {Container, Postcard} from '../components'
+import React, { useEffect } from 'react';
+import { Container, Postcard } from '../components';
+import { useSelector, useDispatch } from 'react-redux';
+import { setPosts } from '../store/postsSlice';
+import service from '../appwrite/config';
+import { setLoading } from '../store/authSlice';
 
 function Home() {
-    const [posts, setPosts] = useState([]);
-    useEffect(() => {
-        service.getPosts([]).then((posts) => {
-            if (posts) setPosts(posts.documents);
-        })
-    }, []);
+    const dispatch = useDispatch();
+    const posts = useSelector((state) => state.posts.posts);
+    const loading = useSelector((state) => state.auth.loading);
 
-    if (!posts || posts.length === 0) {
-        return (
-            <div className="w-full py-8 mt-4 text-center">
-                <Container>
-                    <div className="flex flex-wrap">
-                        <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
-                                Login to read posts
-                            </h1>
-                        </div>
-                    </div>
-                </Container>
-            </div>
-        )
+    useEffect(() => {
+        dispatch(setLoading(true));
+        service.getPosts([]).then((posts) => {
+            if (posts) {
+                dispatch(setPosts({ posts: posts }));
+                dispatch(setLoading(false)); // Set loading to false when fetching completes
+                console.log(`posts in all-posts page :: ${posts}`)
+            }
+        });
+    }, [dispatch]);
+
+    if (loading || !posts) {
+        return <div>Loading...</div>;
     }
+
     return (
         <div className='w-full py-8'>
             <Container>

@@ -6,8 +6,6 @@ const initialState = {
     loading: false
 };
 
-
-
 const authSlice = createSlice({
     name: "auth",
     initialState,

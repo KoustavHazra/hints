@@ -15,6 +15,7 @@ export default function PostForm({ post }) {
 
     useEffect(() => {
         if (post) {
+            console.log(`post details :: ${post.title}, ${post.$id}, ${post.content}, ${post.status}`);
             setValue("title", post.title || "");
             setValue("slug", post.$id || "");
             setValue("content", post.content || "");
@@ -154,7 +155,6 @@ export default function PostForm({ post }) {
                     <div className="w-full mb-4">
                         <img
                             src={service.getFilePreview(post.featuredImage)}
-                            // src={service.getFilePreview(post.featuredImage)}  --> changed featuredImage to $id
                             alt={post.title}
                             className="rounded-lg"
                         />
@@ -175,3 +175,6 @@ export default function PostForm({ post }) {
 }
 
 
+
+
+// next thing is, why the content part of the blog is not coming while I click on the edit button of a blog.. while the title and slug is getting loaded, the content is not .... 
