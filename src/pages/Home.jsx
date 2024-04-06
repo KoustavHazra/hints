@@ -21,7 +21,7 @@ function Home() {
         });
     }, [dispatch]);
 
-    if (loading || !posts) {
+    if (loading || !Array.isArray(posts)) {
         return <div>Loading...</div>;
     }
 

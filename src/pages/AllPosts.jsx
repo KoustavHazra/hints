@@ -29,7 +29,7 @@ function AllPosts() {
         console.log(`posts in state ::`, posts);
     }, [posts]);
 
-    if (loading || !posts) {
+    if (loading || !Array.isArray(posts)) {
         return <div>Loading...</div>;
     }
 
