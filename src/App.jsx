@@ -48,14 +48,12 @@ function App() {
   // we will be doing conditional rendering, based on the user login status we will
   // return different things.
   return !loading ? (
-    <div className='min-h-screen flex flex-wrap content-between bg-green-700'>
-      <div className='w-full block'>
-        <Header />
-        <main>
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
+    <div className='min-h-screen flex flex-col'>
+      <Header />
+      <main className='flex-1'>
+        {!loading ? <Outlet /> : <h2>Loading...</h2>}
+      </main>
+      <Footer />
     </div>
   ) : (<h2>Loading...</h2>)
 }
