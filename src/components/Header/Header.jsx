@@ -36,12 +36,12 @@ function Header() {
   ];
 
   return (
-    <header className='py-3 shadow bg-gray-500'>
+    <header className='py-3 shadow' style={{ background: "#212121" }}>
       <Container>
         <nav className='flex items-center justify-between'>
           <div>
             <Link to='/'>
-              <Logo width='70px' />
+              <Logo width='50px' />
             </Link>
           </div>
           <ul className='flex space-x-4'>
@@ -50,7 +50,11 @@ function Header() {
                 <li key={item.name}>
                   <button
                     onClick={() => navigate(item.slug)}
-                    className='nav-button px-4 py-2 duration-200 hover:bg-blue-100 rounded-full'
+                    className={`nav-button px-4 py-2 duration-200 rounded-full ${
+                      item.name === "Login" ? "hover:bg-blue-700" : 
+                      item.name === "Signup" ? "hover:bg-blue-700" : "hover:bg-purple-400"
+                    }`}
+                    style={{ color: "white" }}
                   >
                     {item.name}
                   </button>

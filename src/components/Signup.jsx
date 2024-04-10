@@ -30,7 +30,7 @@ function Signup() {
     };
 
     return (
-        <div className='flex items-center justify-center h-screen' style={{ marginTop: '-50px' }}>
+        <div className='flex items-center justify-center h-screen' style={{ marginTop: '-100px' }}>
             <div className='w-full max-w-md p-8 bg-white rounded-xl shadow'>
                 <div className='mb-6 flex justify-center'>
                     <Logo width='100px' />

@@ -25,6 +25,7 @@ export class Service{
                     featuredImage,
                     status,
                     userId,
+                    userName  // to show who has created the post
                 }
             )
         } catch (error) {

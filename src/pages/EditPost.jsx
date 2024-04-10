@@ -14,18 +14,6 @@ function EditPost() {
     const {slug} = useParams();
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     if (slug) {
-    //         service.getPost(slug).then((post) =>{
-    //             if (post) {
-    //                 setPost(post);
-    //             }
-    //         })
-    //     } else {
-    //         navigate("/")
-    //     }
-    // }, [slug, navigate]);
-
     useEffect(() => {
         if (slug) {
             service.getPost(slug).then((post) => {

@@ -124,7 +124,7 @@ export default function PostForm({ post }) {
     
 
     return (
-        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
+        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap" style={{ color: "white" }}>
             <div className="w-2/3 px-2">
                 <Input
                     label="Title :"
@@ -173,8 +173,3 @@ export default function PostForm({ post }) {
         </form>
     );
 }
-
-
-
-
-// next thing is, why the content part of the blog is not coming while I click on the edit button of a blog.. while the title and slug is getting loaded, the content is not .... 

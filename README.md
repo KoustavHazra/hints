@@ -25,3 +25,6 @@ CURRENT ISSUES TO FIX ::
 
 5. I need the blogs on home and all-posts page to be placed horizontally. So every row will have a single blog .. with it's title, image and some content.
 
+6. Get the data for user specific blogs, so that we can show that data on the /home and /all-posts page.
+
+7. Need a profile page, where user can go and check their own blogs.

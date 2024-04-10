@@ -13,7 +13,8 @@ export default function Post() {
 
     // checking if the user is author -- if the post user id and the user's user id is same
     const isAuthor = post && userData ? post.userId === userData.$id : false;
-    
+    // console.log(userData.$id);  // 6615ce2aa0687c3250a1
+
     useEffect(() => {
         if (slug) {
             service.getPost(slug).then((post) => {
@@ -47,15 +48,17 @@ export default function Post() {
                         </Button>
                     </div>
                 )}
-                <div className="w-full max-w-lg mx-auto border rounded-xl p-2">
-                <h1 className="text-2xl font-bold title" style={{ textTransform: "capitalize" }}>{post.title}</h1>
+                <div className="w-full mx-auto border rounded-xl p-2" style={{ maxWidth: "800px" }}>
+                    <h1 className="text-2xl font-bold title mt-4" style={{ textTransform: "capitalize", color: "white" }}>
+                        {post.title}
+                    </h1>
                     <img
                         src={service.getFilePreview(post.featuredImage)}
                         alt={post.title}
-                        className="mx-auto mt-4 rounded-xl"
-                        style={{ maxWidth: "100%", height: "auto" }}
+                        className="mx-auto mt-8 mb-8 rounded-xl"
+                        style={{ maxWidth: "100%", height: "auto", verticalAlign: "middle" }}
                     />
-                    <div className="browser-css mt-4">
+                    <div className="browser-css mt-4" style={{ color: "white" }}>
                         {parse(post.content)}
                     </div>
                 </div>
