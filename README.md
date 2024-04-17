@@ -28,3 +28,5 @@ CURRENT ISSUES TO FIX ::
 6. Get the data for user specific blogs, so that we can show that data on the /home and /all-posts page.
 
 7. Need a profile page, where user can go and check their own blogs.
+
+8. add hastags to blogs, then based on hashtags we can search other blogs.
