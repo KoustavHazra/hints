@@ -29,4 +29,6 @@ CURRENT ISSUES TO FIX ::
 
 7. Need a profile page, where user can go and check their own blogs.
 
-8. add hastags to blogs, then based on hashtags we can search other blogs.
+8. Add hastags to blogs, then based on hashtags we can search other blogs.
+
+9. Dark mode.
