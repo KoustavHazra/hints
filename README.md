@@ -2,7 +2,7 @@ Hints is a blog app.
 
 Current version: 0.2
 
-Last updated on: 7th April, 2024
+Last updated on: 10th April, 2024
 
 
 CURRENT ISSUES TO FIX ::
